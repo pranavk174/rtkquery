@@ -1,0 +1,48 @@
+type Reaction {
+    likes: Int
+    dislikes: Int
+}
+
+type Post {
+    _id: ID
+    id:Int
+    title: String
+    body: String
+    tags: [String]
+    reaction : Reaction
+    views: Int
+    userID: Int
+
+
+}
+
+type PostResponse {
+    posts: [Post!]!
+    total: Int!
+    message: String!
+    nextCursor: String
+    hasMore: Boolean!
+}
+
+
+type Query {
+    getPosts(limit: Int, skip: Int, type: String, cursor: String) : PostResponse!
+}
+
+type Mutation {
+    createPost(
+        title: String!
+        body: String!
+        tags: [String]
+        userId: Int
+    ): Post!
+    
+    updatePost(
+        id: ID
+        body: String!
+    ): Post
+    
+    deletePost(
+        id: ID
+    ): String
+}

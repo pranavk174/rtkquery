@@ -1,0 +1,134 @@
+scalar JSON
+
+type Dimensions {
+  depth: Float
+  price: Float
+  rating: Float
+}
+
+input DimensionsInput {
+  depth: Float
+  price: Float
+  rating: Float
+}
+
+type Meta {
+  createdAt: String!
+  updatedAt: String!
+  barcode: String!
+  qrCode: String
+}
+
+type Review {
+  comment: String!
+  date: String
+  rating: Int
+  reviewerEmail: String
+  reviewerName: String
+}
+
+input MetaInput {
+  createdAt: String!
+  updatedAt: String!
+  barcode: String!
+  qrCode: String
+}
+
+input ReviewInput {
+  comment: String!
+  date: String
+  rating: Int
+  reviewerEmail: String
+  reviewerName: String
+}
+
+type Product {
+  _id: ID
+  availabilityStatus: String
+  brand: String
+  category: String
+  description: String
+  dimensions: Dimensions
+
+  images: [String]
+  discountPercentage: Float
+  meta: Meta
+  reviews: [Review]
+  shippingInformation: String
+  sku: String
+  tags: [String]
+  thumbnail: String
+  title: String
+  warrantyInformation: String
+  weight: Int
+  minimumOrderQuantity: Int
+  price: Float
+  returnPolicy: String
+}
+
+input ProductInput {
+  availabilityStatus: String
+  brand: String
+  category: String
+  description: String
+  dimensions: DimensionsInput
+
+  images: [String]
+  discountPercentage: Float
+  meta: MetaInput
+  reviews: [ReviewInput]
+  shippingInformation: String
+  sku: String
+  tags: [String]
+  thumbnail: String
+  title: String
+  warrantyInformation: String
+  weight: Int
+  minimumOrderQuantity: Int
+  price: Float
+  returnPolicy: String
+}
+
+type ProductResponse {
+  message: String
+  products: [Product!]
+  hasMore: Boolean
+  total: Int
+  nextCursor: String
+  categories: [String]
+  brands: [String]
+  titles: [String]
+}
+
+type createResponse {
+  message: String
+  status: Int
+}
+
+type UploadSession {
+  uploadId: String!
+  chunkSize: Int!
+}
+
+type Query {
+  getProducts(
+    limit: Int
+    category: String
+    brand: String
+    title: String
+    cursor: String
+    skip: Int
+  ): ProductResponse
+}
+type Mutation {
+  uploadProducts(body: JSON): createResponse
+  createProduct(body: JSON): createResponse
+  deletProduct(id: ID): String
+  updateProduct(id: ID!, body: ProductInput): Product
+}
+
+extend type Mutation {
+  startUpload: UploadSession!
+  cancelUpload(uploadId: String!): createResponse!
+  finishUpload(uploadId: String!, extension: String!): createResponse!
+}
