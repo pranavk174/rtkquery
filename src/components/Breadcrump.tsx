@@ -5,7 +5,7 @@ const Breadcrump = ({ paths }: string) => {
     { label: "Home", href: "/" },
     { label: "Products", href: "/products" },
     { label: "Electronics", href: "/products/electronics" },
-    { label: "Mobile Phones", href: "/products/electronics/mobiles" },
+    { label: "Mobile Phone", href: "/products/electronics/mobiles" },
   ];
 
   const splittedPath = (pathName: string) => {
