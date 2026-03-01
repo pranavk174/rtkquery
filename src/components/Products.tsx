@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React, { useEffect, useState, useMemo, useRef } from "react";
 import ProductsData from "../products.json";
 import { FixedSizeList } from "react-window";
@@ -43,58 +43,62 @@ const Products: React.FC = () => {
   const [addProducts] = useAddProductsMutation();
   const divRef = useRef<HTMLDivElement | null>(null);
 
-  const [cursor, setCursor] = useState(null)
+  const [cursor, setCursor] = useState(null);
 
   const handleTrigger = () => {
     const mu = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
-        return setCursor(apiData.nextCursor)
+        return setCursor(apiData.nextCursor);
       }
-    })
-  }
-
+    });
+  };
 
   // Memoize query arguments to prevent unnecessary re-renders
-  const queryArgs = useMemo(() => ({
-    limit,
-    skip,
-    category: selectedCategory ?? 'All',
-    brand: selectedBrand ?? "All",
-    title: debouncedTitle ?? 'All',
-    cursor: cursor ?? null
-  }), [limit, skip, selectedCategory, selectedBrand, debouncedTitle]);
+  const queryArgs = useMemo(
+    () => ({
+      limit,
+      skip,
+      category: selectedCategory ?? "All",
+      brand: selectedBrand ?? "All",
+      title: debouncedTitle ?? "All",
+      cursor: cursor ?? null,
+    }),
+    [limit, skip, selectedCategory, selectedBrand, debouncedTitle],
+  );
 
   // Check if this is the initial SSR query (no filters applied)
   const isInitialSSRQuery = useMemo(() => {
-    return limit === 12 && skip === 0 &&
-      !selectedCategory && !selectedBrand && !debouncedTitle;
+    return (
+      limit === 12 &&
+      skip === 0 &&
+      !selectedCategory &&
+      !selectedBrand &&
+      !debouncedTitle
+    );
   }, [limit, skip, selectedCategory, selectedBrand, debouncedTitle]);
-
 
   const {
     data: apiData,
     isLoading,
     isFetching,
     error,
-    isSuccess
+    isSuccess,
   } = useGetProductsQuery(queryArgs);
-
-
 
   const products = apiData?.products ?? [];
   const categories = apiData?.categories ?? [];
   const brands = apiData?.brands ?? [];
   const titles = apiData?.titles ?? [];
   const total = apiData?.total ?? 0;
-  const hasMore = apiData?.hasMore ?? false
+  const hasMore = apiData?.hasMore ?? false;
 
   // Event handlers
   const handleAddProducts = async () => {
     try {
       await addProducts(ProductsData.products).unwrap();
-      console.log('✅ Products uploaded successfully');
+      console.log("✅ Products uploaded successfully");
     } catch (error) {
-      console.error('❌ Failed to upload products:', error);
+      console.error("❌ Failed to upload products:", error);
     }
   };
 
@@ -118,21 +122,22 @@ const Products: React.FC = () => {
   const showLoading = (isLoading || isFetching) && !isInitialSSRQuery;
 
   // Debug logging
-  console.log('🔍 Products Component State:', {
+  console.log("🔍 Products Component State:", {
     apiData,
-
   });
-
 
   useEffect(() => {
     if (!divRef.current) return;
     // if (!apiData?.nextCursor) return; // 👈 stop when no more data
-    console.log("triggereddddddd")
+    console.log("triggereddddddd");
 
-    const observer = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting && !isFetching && apiData?.nextCursor !== null) {
-
-        setCursor(() => apiData?.nextCursor)
+    const observer = new IntersectionObserver((entries) => {
+      if (
+        entries[0].isIntersecting &&
+        !isFetching &&
+        apiData?.nextCursor !== null
+      ) {
+        setCursor(() => apiData?.nextCursor);
       }
     });
 
@@ -141,21 +146,28 @@ const Products: React.FC = () => {
     return () => observer.disconnect();
   }, [apiData?.nextCursor, cursor]);
 
-
   return (
     <div className="">
       {/* Controls */}
       <div className="flex items-center justify-between bg-green-400 relative p-4 mb-4">
-        <Button onClick={handleAddProducts} size="sm" className="text-white" variant="outline">
+        <Button
+          onClick={handleAddProducts}
+          size="sm"
+          className="text-white"
+          variant="outline"
+        >
           Upload Products
         </Button>
 
-        <Select onValueChange={setSelectedCategory} value={selectedCategory ?? "data"}>
+        <Select
+          onValueChange={setSelectedCategory}
+          value={selectedCategory ?? "data"}
+        >
           <SelectTrigger className="w-48">
             <SelectValue placeholder="Category" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">All Categories</SelectItem>
+            <SelectItem value="All">All Categories</SelectItem>
             {categories?.map((cat: any) => (
               <SelectItem key={cat} value={cat}>
                 {cat}
@@ -195,28 +207,25 @@ const Products: React.FC = () => {
 
       {/* Products Grid */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mt-2 max-h-[750px] h-full overflow-y-auto">
-        {products.length > 0 ? (
-          products.map((product: any, idx: number) => {
-            const isLast = idx === products.length - 1;
+        {products.length > 0
+          ? products.map((product: any, idx: number) => {
+              const isLast = idx === products.length - 1;
 
-            return (
-              <div
-                key={product._id ?? idx}
-                ref={isLast ? divRef : null}   // 👈 move sentinel
-              >
-                <ProductCard product={product} />
+              return (
+                <div
+                  key={product._id ?? idx}
+                  ref={isLast ? divRef : null} // 👈 move sentinel
+                >
+                  <ProductCard product={product} />
+                </div>
+              );
+            })
+          : !showLoading && (
+              <div className="col-span-full flex justify-center items-center py-8">
+                <div className="text-white">No products found</div>
               </div>
-            );
-          })
-        ) : (
-          !showLoading && (
-            <div className="col-span-full flex justify-center items-center py-8">
-              <div className="text-white">No products found</div>
-            </div>
-          )
-        )}
+            )}
       </div>
-
 
       {/* Pagination */}
       <div className="w-full flex justify-center gap-5 mt-5 text-white">
