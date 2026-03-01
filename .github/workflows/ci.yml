@@ -33,3 +33,10 @@ jobs:
 
       - name: Install dependencies
         run: pnpm run build
+      
+      - name: Install Vercel
+        run: npm i -g vercel
+
+      - name: Deploye to Vercel
+        if: github.ref == 'refs/heads/main'
+        run: vercel --prod --token=${{ secrets.VERCEL_TOKEN }}
