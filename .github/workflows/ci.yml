@@ -1,4 +1,4 @@
-name : Test CI
+name: Test CI
 
 on: push
 
@@ -6,4 +6,4 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      -run: echo "CI is triggered"
+      - run: echo "CI is triggered"
