@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Breadcrump = ({ paths }: any) => {
+const Breadcrump = ({ paths }: string) => {
   const breadcrumbData = [
     { label: "Home", href: "/" },
     { label: "Products", href: "/products" },
@@ -8,7 +8,7 @@ const Breadcrump = ({ paths }: any) => {
     { label: "Mobile Phones", href: "/products/electronics/mobiles" },
   ];
 
-  const splittedPath = (pathName: any) => {
+  const splittedPath = (pathName: string) => {
     console.log(pathName, "payhname");
     const result =
       pathName !== "/" ? pathName.split("/").filter(Boolean) : pathName;

@@ -68,14 +68,14 @@ export default function Posts() {
     // getData();
   }, []);
 
-  let pages: number[] = [];
+  const pages: number[] = [];
   const totalPages = Math.floor(totals / limit);
 
   for (let i = limit; i <= totals; i += limit) {
     typeof i === "number" ? pages.push(i) : "";
   }
 
-  console.log(pages, "pAGES..", totalPages);
+  // console.log(pages, "pAGES..", totalPages);
   interface Props {
     id: number;
     value: string;
@@ -121,14 +121,14 @@ export default function Posts() {
                 <div className="space-y-4">
                   <input
                     type="text"
-                    value={editingPost.title}
+                    value={editingPost?.title}
                     onChange={(e) =>
                       setEditingPost({ ...editingPost, title: e.target.value })
                     }
                     className="w-full p-2 border rounded font-semibold"
                   />
                   <textarea
-                    value={editingPost.body}
+                    value={editingPost?.body}
                     onChange={(e) =>
                       setEditingPost({ ...editingPost, body: e.target.value })
                     }

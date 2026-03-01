@@ -16,7 +16,7 @@ export interface userProps {
 
 export interface Post {
   _id?: string;
-  id: number;
+  id?: number;
   method?: string
   title?: string;
   body?: string;

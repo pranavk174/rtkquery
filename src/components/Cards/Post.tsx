@@ -1,13 +1,17 @@
 import { useToast } from '@/ContextApi/ToastWrapper';
 import { useEditPostMutation, useLazyGetPostQuery } from '@/redux/services/apiServices';
+import {type Post as p } from '@/redux/types';
 import React, { useState } from 'react'
 
-const Post = ({ post }) => {
+
+type PostProps = {
+  post: p
+}
+
+const Post = ({ post }:PostProps) => {
     const [editPost] = useEditPostMutation();
     const { showToast } = useToast()
-    const [editingPost, setEditingPost] = useState({
-
-    })
+    const [editingPost, setEditingPost] = useState<p| null>({})
     const [getPost] = useLazyGetPostQuery();
     const handleUpdatePost = (id: string) => {
         if (editingPost !== null) editPost({ id, payload: editingPost, method: 'PUT' });
@@ -37,14 +41,14 @@ const Post = ({ post }) => {
                 <div className="space-y-4">
                     <input
                         type="text"
-                        value={editingPost.title}
+                        value={editingPost?.title}
                         onChange={(e) =>
                             setEditingPost({ ...editingPost, title: e.target.value })
                         }
                         className="w-full p-2 border rounded font-semibold"
                     />
                     <textarea
-                        value={editingPost.body}
+                        value={editingPost?.body}
                         onChange={(e) =>
                             setEditingPost({ ...editingPost, body: e.target.value })
                         }
