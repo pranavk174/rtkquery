@@ -1,9 +1,26 @@
-name: Test CI
+name: Next CI
 
-on: push
+on:
+  push:
+    branches:
+        -main
+  pull_request:
+    branches:
+        -main
+    
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - run: echo "CI is triggered"
+      - uses: actions/checkout/@v4
+
+      - uses: ctions/setup-node/@v4
+        with:
+          node-version: 24
+          cache: 'npm'
+          
+      - run: npm ci
+
+      - run: npm run build
