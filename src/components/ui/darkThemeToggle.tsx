@@ -35,7 +35,7 @@ const darkThemeToggle = () => {
         setDark(!dark)
     }
     return (
-        <div className='font-bold flex items-center gap-2'><Switch checked={dark} className='bg-white' onClick={handleToggle} /> {dark ? 'Dark' : 'Light'} </div>
+        <div className='font-bold flex items-center gap-2'><Switch aria-label="Toggle Dark Mode" checked={dark} className='bg-white' onClick={handleToggle} /> {dark ? 'Dark' : 'Light'} </div>
     )
 }
 

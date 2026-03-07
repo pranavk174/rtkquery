@@ -52,13 +52,13 @@ export default function ProductCard({ product }: Props) {
       </div>
       <div className=" w-full flex justify-center gap-5 mt-5 text-white">
         <Button
-          className=" bg-blue-500 px-4 py-2 text-white"
+          className=" bg-blue-500 px-4 py-2  text-green-300"
           onClick={prevSlide}
         >
           Prev
         </Button>
         <Button
-          className=" bg-blue-500 px-4 py-2 text-white"
+          className=" bg-blue-500 px-4 py-2 text-green-300"
           onClick={handleNext}
         >
           Next

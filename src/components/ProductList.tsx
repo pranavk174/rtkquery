@@ -203,7 +203,7 @@ const ProductsList: React.FC = () => {
           onValueChange={setSelectedCategory}
           value={selectedCategory ?? "data"}
         >
-          <SelectTrigger className="w-48">
+          <SelectTrigger className="w-48 text-white" aria-label="Select category">
             <SelectValue placeholder="Category" />
           </SelectTrigger>
           <SelectContent>
@@ -249,22 +249,22 @@ const ProductsList: React.FC = () => {
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mt-2 max-h-[750px] h-full overflow-y-auto">
         {products.length > 0
           ? products.map((product: any, idx: number) => {
-              const isLast = idx === products.length - 1;
+            const isLast = idx === products.length - 1;
 
-              return (
-                <div
-                  key={product._id ?? idx}
-                  ref={isLast ? divRef : null} // 👈 move sentinel
-                >
-                  <ProductCard product={product} />
-                </div>
-              );
-            })
-          : !showLoading && (
-              <div className="col-span-full flex justify-center items-center py-8">
-                <div className="text-white">No products found</div>
+            return (
+              <div
+                key={product._id ?? idx}
+                ref={isLast ? divRef : null} // 👈 move sentinel
+              >
+                <ProductCard product={product} />
               </div>
-            )}
+            );
+          })
+          : !showLoading && (
+            <div className="col-span-full flex justify-center items-center py-8">
+              <div className="text-white">No products found</div>
+            </div>
+          )}
 
         {/* <FixedSizeList
                     height={700}
