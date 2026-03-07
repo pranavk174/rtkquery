@@ -101,8 +101,8 @@ export const GET = async (req: Request) => {
     const { searchParams } = new URL(req.url);
 
     // Log request details for debugging
-    console.log(`[${requestId}] API Request - URL: ${req.url}`);
-    console.log(`[${requestId}] Query params:`, Object.fromEntries(searchParams.entries()));
+    //  console.log(`[${requestId}] API Request - URL: ${req.url}`);
+    //  console.log(`[${requestId}] Query params:`, Object.fromEntries(searchParams.entries()));
 
     // Validate query parameters
     const validation = validateQueryParams(searchParams);
@@ -116,12 +116,12 @@ export const GET = async (req: Request) => {
     }
 
     const params = validation.params!;
-    console.log(`[${requestId}] Validated params:`, params);
+    //  console.log(`[${requestId}] Validated params:`, params);
 
     // Establish database connection
     try {
       await dbConnect();
-      console.log(`[${requestId}] Database connection established`);
+      //  console.log(`[${requestId}] Database connection established`);
     } catch (dbError) {
       console.error(`[${requestId}] Database connection failed:`, dbError);
       return createErrorResponse(
@@ -134,7 +134,7 @@ export const GET = async (req: Request) => {
 
     // Build database filter
     const filter = buildDatabaseFilter(params);
-    console.log(`[${requestId}] Database filter:`, filter);
+    //  console.log(`[${requestId}] Database filter:`, filter);
 
     // Execute database queries
     try {
@@ -147,7 +147,7 @@ export const GET = async (req: Request) => {
       ]);
 
       const queryTime = Date.now() - startTime;
-      console.log(`[${requestId}] Query completed in ${queryTime}ms - Found ${data.length} products`);
+      //  console.log(`[${requestId}] Query completed in ${queryTime}ms - Found ${data.length} products`);
 
       // Handle empty results consistently
       if (data.length === 0) {
@@ -160,7 +160,7 @@ export const GET = async (req: Request) => {
           titles: titles || []
         };
 
-        console.log(`[${requestId}] Returning empty result set`);
+        //  console.log(`[${requestId}] Returning empty result set`);
         return NextResponse.json(response);
       }
 
@@ -174,7 +174,7 @@ export const GET = async (req: Request) => {
         titles: titles || []
       };
 
-      console.log(`[${requestId}] Success response - ${data.length} products, ${total} total`);
+      //  console.log(`[${requestId}] Success response - ${data.length} products, ${total} total`);
       return NextResponse.json(response);
 
     } catch (queryError) {

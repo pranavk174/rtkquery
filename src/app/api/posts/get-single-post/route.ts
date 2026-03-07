@@ -8,8 +8,8 @@ export const GET = async (req: Request) => {
 
     const id = searchParams.get("id");
 
-    // console.log(limit, skip, "skiup data.......");
-    console.log(typeof id, "type of id....");
+    // //  console.log(limit, skip, "skiup data.......");
+    // //  console.log(typeof id, "type of id....");
     dbConnect();
 
     const data = await PostModel.findById(id);
@@ -22,7 +22,7 @@ export const GET = async (req: Request) => {
     }
     return NextResponse.json({ message: "data not found" });
   } catch (err) {
-    console.log(err, "error message");
+    //  console.log(err, "error message");
     return NextResponse.json({ message: "Someething went Wrong", error: err });
   }
 };

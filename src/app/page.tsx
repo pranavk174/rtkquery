@@ -8,7 +8,7 @@ import { fetchPosts, fetchProducts } from "@/utilities/apicalls";
 export default async function Home({ searchParams }: { searchParams: any }) {
   const params = await searchParams; // 👈 unwrap
 
-  // console.log(params, "searchparams....");
+  // //  console.log(params, "searchparams....");
 
   // const tab = params.tab || "post";
 

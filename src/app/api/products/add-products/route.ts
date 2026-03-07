@@ -57,7 +57,7 @@ export const POST = async (req: Request) => {
       { status: 201 }
     );
   } catch (err) {
-    console.log(err, "error.....");
+    // //  console.log(err, "error.....");
     return NextResponse.json(
       {
         message: "Data uploading failed",

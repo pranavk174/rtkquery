@@ -98,7 +98,7 @@ const ProductsList: React.FC = () => {
     status,
   } = useGetProductsQuery(queryArgs);
 
-  //   console.log({
+  //   //  console.log({
   //     error,
   //     isLoading,
   //     isFetching,
@@ -107,7 +107,7 @@ const ProductsList: React.FC = () => {
   //     status,
   //   });
 
-  console.log(useGetProductsQuery(queryArgs));
+  //  console.log(useGetProductsQuery(queryArgs));
 
   const products = apiData?.products ?? [];
   const categories = apiData?.categories ?? [];
@@ -120,7 +120,7 @@ const ProductsList: React.FC = () => {
   const handleAddProducts = async () => {
     try {
       await uploadProducts(ProductsData.products).unwrap();
-      console.log("✅ Products uploaded successfully");
+      //  console.log("✅ Products uploaded successfully");
     } catch (error) {
       console.error("❌ Failed to upload products:", error);
     }
@@ -146,14 +146,14 @@ const ProductsList: React.FC = () => {
   const showLoading = (isLoading || isFetching) && !isInitialSSRQuery;
 
   //   // Debug logging
-  //   console.log("🔍 Products Component State:", {
+  //   //  console.log("🔍 Products Component State:", {
   //     apiData,
   //   });
 
   useEffect(() => {
     if (!divRef.current) return;
     // if (!apiData?.nextCursor) return; // 👈 stop when no more data
-    // console.log("triggereddddddd");
+    // //  console.log("triggereddddddd");
 
     const observer = new IntersectionObserver((entries) => {
       if (

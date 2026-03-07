@@ -26,7 +26,7 @@ export default function ProductCard({ product }: Props) {
     transition: "transform 0.5s ease-in-out",
   };
 
-  // console.log(product, "thumbnaillll");
+  // //  console.log(product, "thumbnaillll");
   return (
     <div className="w-full  rounded-xl border  bg-white shadow-sm p-4 space-y-3">
       {/* Thumbnail */}

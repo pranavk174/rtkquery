@@ -11,7 +11,7 @@ export const GET = async (req: Request) => {
     const skip = Number(searchParams.get("skip")) || 0;
     const type = searchParams.get("type");
 
-    console.log(typeof type, "skiup data.......", type);
+    //  console.log(typeof type, "skiup data.......", type);
     await dbConnect();
 
     if (!type) {
@@ -64,7 +64,7 @@ export const GET = async (req: Request) => {
     }
     return NextResponse.json({ message: "data not found" });
   } catch (err) {
-    console.log(err, "error message");
+    //  console.log(err, "error message");
     return NextResponse.json({ message: "Someething went Wrong", error: err });
   }
 };

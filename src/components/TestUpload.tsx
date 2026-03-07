@@ -50,7 +50,7 @@ const TestUpload = () => {
       const done = await finishUpload({ uploadId: id, extension });
 
       if (done) {
-        console.log(done);
+        //  console.log(done);
         alert("upload completed");
       } else {
         alert("error in uploading");
@@ -63,7 +63,7 @@ const TestUpload = () => {
   const handleUpload = async () => {
     const data = await startUpload(file?.name ?? "").unwrap();
     // const id = data.data.data.startUpload.uploadId;
-    console.log("data.....", data);
+    //  console.log("data.....", data);
     // if (id) {
     //   setUploadId(id);
     //   uploadData(id);

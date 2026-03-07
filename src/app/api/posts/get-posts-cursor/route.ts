@@ -11,7 +11,7 @@ export const GET = async (req: Request) => {
     const cursor = searchParams.get('cursor')
     const type = searchParams.get("type");
 
-    console.log(typeof type, "skiup data.......", type);
+    //  console.log(typeof type, "skiup data.......", type);
     dbConnect();
 
     if (!type) {
@@ -48,10 +48,10 @@ export const GET = async (req: Request) => {
     }
 
     const hasMore = posts.length > limit
-    // console.log(hasMore, "hasmore.....")
+    // //  console.log(hasMore, "hasmore.....")
 
     const slicedPosts = hasMore ? posts.slice(0, limit) : posts;
-    // console.log(slicedPosts, "sclied prostssss")
+    // //  console.log(slicedPosts, "sclied prostssss")
     const nextCursor = hasMore ? slicedPosts[slicedPosts.length - 1]._id : null
 
 
@@ -68,7 +68,7 @@ export const GET = async (req: Request) => {
 
 
   } catch (err) {
-    console.log(err, "error message");
+    //  console.log(err, "error message");
     return NextResponse.json({ message: "Someething went Wrong", error: err });
   }
 };

@@ -1,17 +1,17 @@
 import { useToast } from '@/ContextApi/ToastWrapper';
 import { useEditPostMutation, useLazyGetPostQuery } from '@/redux/services/apiServices';
-import {type Post as p } from '@/redux/types';
+import { type Post as p } from '@/redux/types';
 import React, { useState } from 'react'
 
 
 type PostProps = {
-  post: p
+    post: p
 }
 
-const Post = ({ post }:PostProps) => {
+const Post = ({ post }: PostProps) => {
     const [editPost] = useEditPostMutation();
     const { showToast } = useToast()
-    const [editingPost, setEditingPost] = useState<p| null>({})
+    const [editingPost, setEditingPost] = useState<p | null>({})
     const [getPost] = useLazyGetPostQuery();
     const handleUpdatePost = (id: string) => {
         if (editingPost !== null) editPost({ id, payload: editingPost, method: 'PUT' });
@@ -26,7 +26,7 @@ const Post = ({ post }:PostProps) => {
 
 
     const handleClick = (id: string) => {
-        console.log(id, "id........");
+        //  console.log(id, "id........");
         getPost(id);
     };
 
@@ -95,7 +95,7 @@ const Post = ({ post }:PostProps) => {
                             </button>
                             <button
                                 onClickCapture={(e) => {
-                                    console.log("hello world", post.id)
+                                    //  console.log("hello world", post.id)
                                     e.stopPropagation(), post._id !== undefined ? handleDeletePost(String(post._id)) : '';
                                 }}
 

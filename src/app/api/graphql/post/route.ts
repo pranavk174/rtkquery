@@ -52,7 +52,7 @@ const schema = createSchema({
                     }
                 }
                 catch (err) {
-                    console.log(err)
+                    //  console.log(err)
                     return {
                         error: err,
                         message: "error some thing wrong",

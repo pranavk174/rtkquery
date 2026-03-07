@@ -96,7 +96,7 @@ const Products: React.FC = () => {
   const handleAddProducts = async () => {
     try {
       await addProducts(ProductsData.products).unwrap();
-      console.log("✅ Products uploaded successfully");
+      //  console.log("✅ Products uploaded successfully");
     } catch (error) {
       console.error("❌ Failed to upload products:", error);
     }
@@ -122,144 +122,144 @@ const Products: React.FC = () => {
   const showLoading = (isLoading || isFetching) && !isInitialSSRQuery;
 
   // Debug logging
-  console.log("🔍 Products Component State:", {
-    apiData,
+  //  console.log("🔍 Products Component State:", {
+  apiData,
   });
 
-  useEffect(() => {
-    if (!divRef.current) return;
-    // if (!apiData?.nextCursor) return; // 👈 stop when no more data
-    console.log("triggereddddddd");
+useEffect(() => {
+  if (!divRef.current) return;
+  // if (!apiData?.nextCursor) return; // 👈 stop when no more data
+  //  console.log("triggereddddddd");
 
-    const observer = new IntersectionObserver((entries) => {
-      if (
-        entries[0].isIntersecting &&
-        !isFetching &&
-        apiData?.nextCursor !== null
-      ) {
-        setCursor(() => apiData?.nextCursor);
-      }
-    });
+  const observer = new IntersectionObserver((entries) => {
+    if (
+      entries[0].isIntersecting &&
+      !isFetching &&
+      apiData?.nextCursor !== null
+    ) {
+      setCursor(() => apiData?.nextCursor);
+    }
+  });
 
-    if (divRef.current) observer.observe(divRef.current);
+  if (divRef.current) observer.observe(divRef.current);
 
-    return () => observer.disconnect();
-  }, [apiData?.nextCursor, cursor]);
+  return () => observer.disconnect();
+}, [apiData?.nextCursor, cursor]);
 
-  return (
-    <div className="">
-      {/* Controls */}
-      <div className="flex items-center justify-between bg-green-400 relative p-4 mb-4">
-        <Button
-          onClick={handleAddProducts}
-          size="sm"
-          className="text-white"
-          variant="outline"
-        >
-          Upload Products
-        </Button>
+return (
+  <div className="">
+    {/* Controls */}
+    <div className="flex items-center justify-between bg-green-400 relative p-4 mb-4">
+      <Button
+        onClick={handleAddProducts}
+        size="sm"
+        className="text-white"
+        variant="outline"
+      >
+        Upload Products
+      </Button>
 
-        <Select
-          onValueChange={setSelectedCategory}
-          value={selectedCategory ?? "data"}
-        >
-          <SelectTrigger className="w-48">
-            <SelectValue placeholder="Category" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="All">All Categories</SelectItem>
-            {categories?.map((cat: any) => (
-              <SelectItem key={cat} value={cat}>
-                {cat}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+      <Select
+        onValueChange={setSelectedCategory}
+        value={selectedCategory ?? "data"}
+      >
+        <SelectTrigger className="w-48">
+          <SelectValue placeholder="Category" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="All">All Categories</SelectItem>
+          {categories?.map((cat: any) => (
+            <SelectItem key={cat} value={cat}>
+              {cat}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
 
-        <Button onClick={handleReset} size="sm" variant="outline">
-          Reset Filter <span>Clear data</span>
-        </Button>
+      <Button onClick={handleReset} size="sm" variant="outline">
+        Reset Filter <span>Clear data</span>
+      </Button>
 
-        <div className="max-w-[200px]">
-          <Input
-            value={search || ""}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search products..."
-          />
-        </div>
+      <div className="max-w-[200px]">
+        <Input
+          value={search || ""}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Search products..."
+        />
       </div>
-
-      {/* Loading State */}
-      {showLoading && (
-        <div className="flex justify-center items-center py-8">
-          <div className="text-white">Loading products...</div>
-        </div>
-      )}
-
-      {/* Error State */}
-      {error && (
-        <div className="flex justify-center items-center py-8">
-          <div className="text-red-500">
-            Error loading products: {error.toString()}
-          </div>
-        </div>
-      )}
-
-      {/* Products Grid */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mt-2 max-h-[750px] h-full overflow-y-auto">
-        {products.length > 0
-          ? products.map((product: any, idx: number) => {
-              const isLast = idx === products.length - 1;
-
-              return (
-                <div
-                  key={product._id ?? idx}
-                  ref={isLast ? divRef : null} // 👈 move sentinel
-                >
-                  <ProductCard product={product} />
-                </div>
-              );
-            })
-          : !showLoading && (
-              <div className="col-span-full flex justify-center items-center py-8">
-                <div className="text-white">No products found</div>
-              </div>
-            )}
-      </div>
-
-      {/* Pagination */}
-      <div className="w-full flex justify-center gap-5 mt-5 text-white">
-        <Button
-          className="bg-blue-500 px-4 py-2 text-white"
-          onClick={handlePrevPage}
-          disabled={skip <= 0 || showLoading}
-        >
-          Prev
-        </Button>
-
-        <div className="flex items-center px-4 py-2 bg-gray-700 rounded">
-          {Math.floor(skip / limit) + 1} of {Math.ceil(total / limit) || 1}
-        </div>
-
-        <Button
-          className="bg-blue-500 px-4 py-2 text-white"
-          onClick={handleNextPage}
-          disabled={skip + limit >= total || showLoading}
-        >
-          Next
-        </Button>
-
-        <Button
-          className="bg-blue-500 px-4 py-2 text-white"
-          onClick={() => setOpen(true)}
-        >
-          Open Modal
-        </Button>
-      </div>
-
-      <Modal open={open} onClose={() => setOpen(false)} />
     </div>
-  );
+
+    {/* Loading State */}
+    {showLoading && (
+      <div className="flex justify-center items-center py-8">
+        <div className="text-white">Loading products...</div>
+      </div>
+    )}
+
+    {/* Error State */}
+    {error && (
+      <div className="flex justify-center items-center py-8">
+        <div className="text-red-500">
+          Error loading products: {error.toString()}
+        </div>
+      </div>
+    )}
+
+    {/* Products Grid */}
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mt-2 max-h-[750px] h-full overflow-y-auto">
+      {products.length > 0
+        ? products.map((product: any, idx: number) => {
+          const isLast = idx === products.length - 1;
+
+          return (
+            <div
+              key={product._id ?? idx}
+              ref={isLast ? divRef : null} // 👈 move sentinel
+            >
+              <ProductCard product={product} />
+            </div>
+          );
+        })
+        : !showLoading && (
+          <div className="col-span-full flex justify-center items-center py-8">
+            <div className="text-white">No products found</div>
+          </div>
+        )}
+    </div>
+
+    {/* Pagination */}
+    <div className="w-full flex justify-center gap-5 mt-5 text-white">
+      <Button
+        className="bg-blue-500 px-4 py-2 text-white"
+        onClick={handlePrevPage}
+        disabled={skip <= 0 || showLoading}
+      >
+        Prev
+      </Button>
+
+      <div className="flex items-center px-4 py-2 bg-gray-700 rounded">
+        {Math.floor(skip / limit) + 1} of {Math.ceil(total / limit) || 1}
+      </div>
+
+      <Button
+        className="bg-blue-500 px-4 py-2 text-white"
+        onClick={handleNextPage}
+        disabled={skip + limit >= total || showLoading}
+      >
+        Next
+      </Button>
+
+      <Button
+        className="bg-blue-500 px-4 py-2 text-white"
+        onClick={() => setOpen(true)}
+      >
+        Open Modal
+      </Button>
+    </div>
+
+    <Modal open={open} onClose={() => setOpen(false)} />
+  </div>
+);
 };
 
 export default Products;

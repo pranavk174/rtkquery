@@ -8,20 +8,20 @@ export const POST = async (req: Request) => {
 
   dbConnect();
 
-  //   console.log(data, "data.........");
+  //   //  console.log(data, "data.........");
   try {
     const found = await PostModel.find();
-    // console.log(found, "found daaataa");
+    // //  console.log(found, "found daaataa");
     if (found.length > 0) {
       const deleted = await PostModel.deleteMany();
-      //   console.log(deleted, "delete successfull");
+      //   //  console.log(deleted, "delete successfull");
 
       const saved = await PostModel.insertMany(data);
 
       //   const saved = await upload.save();
 
       if (saved) {
-        // console.log("data is saved....");
+        // //  console.log("data is saved....");
         return NextResponse.json(
           { message: "Created after deleting old data...", saved: saved },
           { status: 201 }
@@ -32,14 +32,14 @@ export const POST = async (req: Request) => {
     const saved = await PostModel.insertMany(data);
 
     if (saved) {
-      //   console.log("data is saved....");
+      //   //  console.log("data is saved....");
       return NextResponse.json(
         { message: "Created", saved: saved },
         { status: 201 }
       );
     }
   } catch (err) {
-    console.log("error in saving", err);
+    // //  console.log("error in saving", err);
     return NextResponse.json(
       { message: "failed", error: err },
       { status: 500 }

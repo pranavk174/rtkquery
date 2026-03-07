@@ -27,24 +27,24 @@ export default function VirtualizedPosts() {
 
     const [editPost] = useEditPostMutation();
 
-    console.log(data, "data==========??????????????==============")
+    //  console.log(data, "data==========??????????????==============")
     const posts: Post[] = data?.posts ?? [];
     const totals: number = data?.total ?? 0;
 
-    console.log(posts, "posts.....");
+    //  console.log(posts, "posts.....");
 
     const handleUpload = async () => {
-        console.log(jsondata.posts, "data.....");
+        //  console.log(jsondata.posts, "data.....");
 
         const done = await uploadPosts(jsondata.posts);
-        console.log(done, "done.....");
+        //  console.log(done, "done.....");
         showToast("Upload completed", 'success', 5000)
     };
 
     // const handleScroll = () => {
     //   if (window.innerHeight + window.scrollY > document.body.offsetHeight - 200 && data?.hasMore && !isFetching) {
     //     setCursor(data?.nextCursor)
-    //     console.log("triggered data...")
+    //     //  console.log("triggered data...")
     //   }
     // }
 
@@ -55,7 +55,7 @@ export default function VirtualizedPosts() {
     useEffect(() => {
         const observer = new IntersectionObserver(entries => {
             if (entries[0].isIntersecting && data?.hasMore && !isFetching) {
-                // console.log(entries, "entriesssssssss")
+                // //  console.log(entries, "entriesssssssss")
                 setCursor(() => data.nextCursor)
             }
         }, {
@@ -65,12 +65,12 @@ export default function VirtualizedPosts() {
 
         if (bottomRef.current) observer.observe(bottomRef.current)
 
-        console.log("= data =================")
+        //  console.log("= data =================")
         return () => observer.disconnect()
     }, [data, cursor]);
 
 
-    console.log(cursor, "cursor       ==========")
+    //  console.log(cursor, "cursor       ==========")
 
     let pages: number[] = [];
     const totalPages = Math.floor(totals / 10);
@@ -79,7 +79,7 @@ export default function VirtualizedPosts() {
         typeof i === "number" ? pages.push(i) : "";
     }
 
-    console.log(pages, "pAGES..", totalPages);
+    //  console.log(pages, "pAGES..", totalPages);
     interface Props {
         id: number;
         value: string;
@@ -127,8 +127,8 @@ export default function VirtualizedPosts() {
     }
 
     const handleIndex = ({ visibleStopIndex }: ItemsRenderedProps) => {
-        console.log("chhhhhhhhakfhkahfkahfkakfhafkj======")
-        console.log(data?.nextCursor, "==========")
+        //  console.log("chhhhhhhhakfhkahfkahfkakfhafkj======")
+        //  console.log(data?.nextCursor, "==========")
         if (visibleStopIndex > posts.length - 2 && data?.hasMore && !isFetching) {
             setCursor(() => data?.nextCursor)
 

@@ -78,7 +78,7 @@ const schema = createSchema({
             .sort({ _id: 1 })
             .limit(limit + 1);
 
-          console.log(res, "prodctsssssssss", products, filter);
+          //  console.log(res, "prodctsssssssss", products, filter);
 
           const hasMore = products.length > limit;
 
@@ -124,7 +124,7 @@ const schema = createSchema({
     Mutation: {
       uploadProducts: async (_, { body }) => {
         try {
-          console.log(body);
+          //  console.log(body);
 
           const data = await ProductModel.find();
           if (data.length > 0) {
@@ -143,7 +143,7 @@ const schema = createSchema({
             status: 201,
           };
         } catch (err) {
-          console.log(err, "error.......");
+          //  console.log(err, "error.......");
           return {
             message: "Something went Wrong",
             status: 500,
@@ -191,7 +191,7 @@ const schema = createSchema({
 
           return { message: "Cancel Upload Succeeeded", status: 200 };
         } catch (err) {
-          console.log(err, "err");
+          //  console.log(err, "err");
           return { message: "Cancel Upload Failed", status: 500 };
         }
       },

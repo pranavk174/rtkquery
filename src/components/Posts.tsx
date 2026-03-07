@@ -32,22 +32,22 @@ export default function Posts() {
   const [editPost] = useEditPostMutation();
   // const [deletePost] = useDeletePostMutation();
 
-  console.log(data, "data==========??????????????==============")
+  //  console.log(data, "data==========??????????????==============")
   const posts: Post[] = data?.posts ?? [];
   const totals: number = data?.total ?? 0;
 
-  console.log(posts, "posts.....");
+  //  console.log(posts, "posts.....");
 
   const handleUpload = async () => {
-    console.log(jsondata.posts, "data.....");
+    //  console.log(jsondata.posts, "data.....");
 
     const done = await uploadPosts(jsondata.posts);
-    console.log(done, "done.....");
+    //  console.log(done, "done.....");
     showToast("Upload completed", 'success', 5000)
   };
 
   const handleClick = (id: string) => {
-    console.log(id, "id........");
+    //  console.log(id, "id........");
     getPost(id);
   };
 
@@ -75,7 +75,7 @@ export default function Posts() {
     typeof i === "number" ? pages.push(i) : "";
   }
 
-  // console.log(pages, "pAGES..", totalPages);
+  // //  console.log(pages, "pAGES..", totalPages);
   interface Props {
     id: number;
     value: string;
@@ -175,7 +175,7 @@ export default function Posts() {
                       </button>
                       <button
                         onClickCapture={(e) => {
-                          console.log("hello world", post.id)
+                          //  console.log("hello world", post.id)
                           e.stopPropagation(), post._id !== undefined ? handleDeletePost(String(post._id)) : '';
                         }}
 

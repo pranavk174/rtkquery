@@ -59,7 +59,7 @@ export default function VirtualizedVariablePosts() {
                 const height = entries[0].contentRect.height;
 
                 const prev = sizeMap.current[index];
-                console.log(height, "entriuesssssss", prev, sizeMap)
+                //  console.log(height, "entriuesssssss", prev, sizeMap)
                 if (prev !== height) {
                     sizeMap.current[index] = height;
                     listRef.current?.resetAfterIndex(index);

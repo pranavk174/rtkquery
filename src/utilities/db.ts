@@ -22,7 +22,7 @@ if (!cached) {
 export async function dbConnect(): Promise<typeof mongoose> {
   // Return existing connection if available
   if (cached.conn) {
-    console.log("✅ Using existing MongoDB connection");
+    //  console.log("✅ Using existing MongoDB connection");
     return cached.conn;
   }
 
@@ -38,9 +38,9 @@ export async function dbConnect(): Promise<typeof mongoose> {
 
     cached.promise = (async () => {
       try {
-        console.log("🔄 Connecting to MongoDB...");
+        //  console.log("🔄 Connecting to MongoDB...");
         const connection = await mongoose.connect(MONGODB_URI, opts);
-        console.log("✅ MongoDB connected successfully");
+        //  console.log("✅ MongoDB connected successfully");
 
         // Handle connection events
         connection.connection.on("error", (error) => {

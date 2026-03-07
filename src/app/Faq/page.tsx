@@ -7,7 +7,7 @@ import Link from "next/link";
 const page = () => {
   const pathName = usePathname();
 
-  console.log(pathName, "path name");
+  //  console.log(pathName, "path name");
   return (
     <div className="text-white">
       page

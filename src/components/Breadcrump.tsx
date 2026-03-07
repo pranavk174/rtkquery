@@ -9,17 +9,17 @@ const Breadcrump = ({ paths }: string) => {
   ];
 
   const splittedPath = (pathName: string) => {
-    console.log(pathName, "payhname");
+    //  console.log(pathName, "payhname");
     const result =
       pathName !== "/" ? pathName.split("/").filter(Boolean) : pathName;
-    console.log(result, "result....");
+    //  console.log(result, "result....");
 
     return result;
   };
 
   const data = splittedPath(paths);
 
-  console.log(typeof data, "data....");
+  //  console.log(typeof data, "data....");
 
   const [items, setItems] = useState<string[]>([]);
 

@@ -41,7 +41,7 @@ export default function ProductForm() {
         try {
             await createProduct({ body: product }).unwrap();
 
-            console.log("Product created");
+            //  console.log("Product created");
         } catch (err) {
             console.error(err);
         }

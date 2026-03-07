@@ -135,7 +135,7 @@ reviews {
       }),
       providesTags: ["Product"],
       transformResponse: (response: any) => {
-        console.log(response.data.getProducts, "=========hsfhklsdhfsdfhsdkf");
+        //  console.log(response.data.getProducts, "=========hsfhklsdhfsdfhsdkf");
 
         return response.data.getProducts;
       },
@@ -145,7 +145,7 @@ reviews {
       },
 
       merge: (currentCache, newData) => {
-        console.log("new data", newData, currentCache);
+        //  console.log("new data", newData, currentCache);
         currentCache.products.push(...newData.products);
         currentCache.nextCursor = newData.nextCursor;
         currentCache.hasMore = newData.hasMore;
@@ -155,14 +155,14 @@ reviews {
       },
 
       forceRefetch({ currentArg, previousArg }) {
-        console.log(currentArg.previousArg, "prwevious argsssss", previousArg);
+        //  console.log(currentArg.previousArg, "prwevious argsssss", previousArg);
         return currentArg?.cursor !== previousArg?.cursor;
       },
     }),
 
     uploadProducts: builder.mutation({
       query: (body) => (
-        console.log(body, "body data....."),
+        //  console.log(body, "body data....."),
         {
           url: "",
           method: "POST",
@@ -181,12 +181,12 @@ reviews {
     }),
     createProduct: builder.mutation({
       query: ({ body }) =>
-        // console.log(formData, "formdata..."),
-        ({
-          url: "",
-          method: "POST",
-          body: {
-            query: `
+      // //  console.log(formData, "formdata..."),
+      ({
+        url: "",
+        method: "POST",
+        body: {
+          query: `
                 mutation createProduct($body: JSON){
                 createProduct(body:$body){
                 
@@ -194,9 +194,9 @@ reviews {
                 status
                 
                 }}`,
-            variables: { body },
-          },
-        }),
+          variables: { body },
+        },
+      }),
     }),
     startUpload: builder.mutation({
       query: () => ({

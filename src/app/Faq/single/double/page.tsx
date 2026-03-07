@@ -5,14 +5,14 @@ import Breadcrump from "@/components/Breadcrump";
 
 const page = () => {
   const pathName = usePathname();
-  console.log(usePathname(), "current path.....");
+  //  console.log(usePathname(), "current path.....");
 
   const splittedPath = () => {
     const result = pathName.split("/").filter(Boolean);
-    console.log(result, "result....");
+    //  console.log(result, "result....");
 
     const final = result.join("-->");
-    console.log(final, "final");
+    //  console.log(final, "final");
     return final;
   };
 
