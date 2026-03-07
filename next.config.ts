@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
   images: {
-    domains: ['https://picsum.photos', 'https://cdn.dummyjson.com']
+    domains: ["picsum.photos", "cdn.dummyjson.com"],
   },
   typescript: {
     ignoreBuildErrors: true,

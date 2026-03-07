@@ -46,7 +46,7 @@ export default function ProductCard({ product }: Props) {
           }}
         >
           {product?.images?.map((i, idx) => {
-            return <Image width={300} height={300} src={i} key={i} alt="images" />;
+            return <Image width={500} height={300} src={i} key={i} alt="images" />;
           })}
         </div>
       </div>
