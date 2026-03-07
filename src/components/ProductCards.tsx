@@ -40,14 +40,20 @@ export default function ProductCard({ product }: Props) {
 
       <div className="w-full overflow-hidden relative  rounded-md ">
         <div
-          className="flex transition-all duration-300 ease-in-out"
+          className="flex transition-all relative w-full h-[300px] duration-300 ease-in-out"
           style={{
             transform: `translateX(-${index * 100}%)`,
           }}
         >
-          {product?.images?.map((i, idx) => {
-            return <Image width={500} height={300} src={i} key={i} alt="images" />;
-          })}
+
+          {product.images && product?.images?.length === 0 ? <div className="animate-pulse h-40 bg-gray-200 rounded" /> : (product?.images?.map((i, idx) => {
+            return <Image className="object-cover" fill src={i} key={i} alt="images" />;
+          }))}
+
+
+          {/* {product?.images?.map((i, idx) => {
+            return <Image className="object-cover" fill src={i} key={i} alt="images" />;
+          })} */}
         </div>
       </div>
       <div className=" w-full flex justify-center gap-5 mt-5 text-white">
