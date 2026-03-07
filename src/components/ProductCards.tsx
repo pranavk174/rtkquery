@@ -1,7 +1,7 @@
 import { Product } from "@/redux/types";
 import { useState } from "react";
 import { Button } from "./ui/button";
-
+import Image from "next/image";
 interface Props {
   product: Product;
 }
@@ -46,7 +46,7 @@ export default function ProductCard({ product }: Props) {
           }}
         >
           {product?.images?.map((i, idx) => {
-            return <img src={i} key={i} alt="images" />;
+            return <Image width={300} height={300} src={i} key={i} alt="images" />;
           })}
         </div>
       </div>
