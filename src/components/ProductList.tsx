@@ -30,6 +30,7 @@ import { useDebounce } from "@/utilities/hooks";
 import Modal from "./Modal";
 import { prefillCacheAndPreventDuplicates } from "@/utilities/cacheHydration";
 import ProductForm from "./ProductForm";
+import ProductCardSkeleton from "./Cards/Skeleton";
 
 interface ProductsProps {
   initialProducts: productResponse;
@@ -143,7 +144,7 @@ const ProductsList: React.FC = () => {
   };
 
   // Loading state
-  const showLoading = (isLoading || isFetching) && !isInitialSSRQuery;
+  const showLoading = (isLoading || isFetching);
 
   //   // Debug logging
   //   //  console.log("🔍 Products Component State:", {
@@ -230,11 +231,7 @@ const ProductsList: React.FC = () => {
       </div>
 
       {/* Loading State */}
-      {showLoading && (
-        <div className="flex justify-center items-center py-8">
-          <div className="text-white">Loading products...</div>
-        </div>
-      )}
+
 
       {/* Error State */}
       {error && (
@@ -247,6 +244,16 @@ const ProductsList: React.FC = () => {
 
       {/* Products Grid */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mt-2 max-h-[750px] h-full overflow-y-auto">
+        {showLoading &&
+
+
+          Array.from({ length: 6 }).map((_, i) => (
+            <ProductCardSkeleton key={i} />
+          ))
+        }
+        {/* <ProductCardSkeleton /> */}
+
+
         {products.length > 0
           ? products.map((product: any, idx: number) => {
             const isLast = idx === products.length - 1;
@@ -260,11 +267,11 @@ const ProductsList: React.FC = () => {
               </div>
             );
           })
-          : !showLoading && (
-            <div className="col-span-full flex justify-center items-center py-8">
-              <div className="text-white">No products found</div>
-            </div>
-          )}
+          :
+          <div className="col-span-full flex justify-center items-center py-8">
+            <div className="text-white">No {showLoading} products found</div>
+          </div>
+        }
 
         {/* <FixedSizeList
                     height={700}

@@ -47,13 +47,13 @@ export default function ProductCard({ product }: Props) {
         >
 
           {product.images && product?.images?.length === 0 ? <div className="animate-pulse h-40 bg-gray-200 rounded" /> : (product?.images?.map((i, idx) => {
-            return <Image
+            return <div key={i}><Image
               src={i}
               fill
               className="object-contain"
               // sizes="(max-width: 768px) 100vw, 300px"
               alt="product"
-            />
+            /></div>
           }))}
 
 
