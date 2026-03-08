@@ -9,7 +9,7 @@ import { Post } from "@/redux/types";
 import { useGetPostsQuery } from "@/redux/services/graphqlAPi";
 import { FixedSizeList } from "react-window";
 import PostCard from "./Cards/Post";
-import jsondata from "../data.json";
+// import jsondata from "../data.json";
 import { useToast } from "@/ContextApi/ToastWrapper";
 import Loading from "./Loader";
 export default function VirtualizedPosts() {
@@ -36,7 +36,7 @@ export default function VirtualizedPosts() {
     const handleUpload = async () => {
         //  console.log(jsondata.posts, "data.....");
 
-        const done = await uploadPosts(jsondata.posts);
+        // const done = await uploadPosts(jsondata.posts);
         //  console.log(done, "done.....");
         showToast("Upload completed", 'success', 5000)
     };

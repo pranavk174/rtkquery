@@ -10,7 +10,7 @@ import {
   useGetCursorPostsQuery,
 } from "@/redux/services/apiServices";
 import { Post, PostsProps } from "@/redux/types";
-import jsondata from "../data.json";
+// import jsondata from "../data.json";
 import { useToast } from "@/ContextApi/ToastWrapper";
 import Loading from "./Loader";
 export default function CursorPosts() {
@@ -44,7 +44,7 @@ export default function CursorPosts() {
   const handleUpload = async () => {
     //  console.log(jsondata.posts, "data.....");
 
-    const done = await uploadPosts(jsondata.posts);
+    // const done = await uploadPosts(jsondata.posts);
     //  console.log(done, "done.....");
     showToast("Upload completed", 'success', 5000)
   };

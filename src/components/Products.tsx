@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState, useMemo, useRef } from "react";
-import ProductsData from "../products.json";
+// import ProductsData from "../products.json";
 import { FixedSizeList } from "react-window";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
@@ -95,7 +95,7 @@ const Products: React.FC = () => {
   // Event handlers
   const handleAddProducts = async () => {
     try {
-      await addProducts(ProductsData.products).unwrap();
+      // await addProducts(ProductsData.products).unwrap();
       //  console.log("✅ Products uploaded successfully");
     } catch (error) {
       console.error("❌ Failed to upload products:", error);

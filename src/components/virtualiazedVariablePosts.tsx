@@ -8,7 +8,7 @@ import {
 } from "@/redux/services/apiServices";
 import { Post } from "@/redux/types";
 import PostCard from "./Cards/Post";
-import jsondata from "../data.json";
+// import jsondata from "../data.json";
 import { useToast } from "@/ContextApi/ToastWrapper";
 import Loading from "./Loader";
 
@@ -29,7 +29,7 @@ export default function VirtualizedVariablePosts() {
 
     // Upload handler
     const handleUpload = async () => {
-        await uploadPosts(jsondata.posts);
+        // await uploadPosts(jsondata.posts);
         showToast("Upload completed", "success", 3000);
     };
 
