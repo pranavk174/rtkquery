@@ -51,10 +51,9 @@ export default function ProductCard({ product }: Props) {
               <Image
                 src={i}
                 fill
+                priority={true}
                 className="object-contain"
-                sizes="(max-width: 640px) 100vw,
-           (max-width: 1024px) 50vw,
-           33vw"
+                sizes="(max-width: 768px) 100vw, 300px"
                 alt="product"
               />
             </div>
