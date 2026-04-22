@@ -1,6 +1,6 @@
 "use client";
-import { useState } from "react";
-
+import { useCallback, useState } from "react";
+import RenderFiles from "./Folder";
 interface folder {
   name: string;
   type: string;
@@ -15,23 +15,36 @@ interface inputProps {
 }
 
 const Manager = () => {
-  const [file, setFile] = useState<folder[]>([]);
+  const [file, setFile] = useState<folder[]>([
+    {
+      name: "src",
+      type: "folder",
+      source: "root",
+      items: [],
+      id: crypto.randomUUID(),
+    },
+  ]);
   const [showInput, setShowInput] = useState<inputProps | null>(null);
   const [name, setName] = useState("");
   const [open, setOpen] = useState<string | null>(null);
   //   const [state, dispatch] = useReducer(reducer, initialState);
 
   const findSource = (source: string, folder: folder[], payload: folder) => {
+    debugger;
     if (!source) {
       return folder;
     }
-    debugger;
+
+    console.log("yes her pk..", folder, source);
+
     if (source === "root") {
       //   folder.push(payload);
       //   setFile(folder);
+
       return [...folder, payload];
     }
     const updated: folder[] = folder.map((d) => {
+      console.log(d, "ddtaaaaa");
       if (typeof d === "object") {
         if (d.id === source) {
           console.log(d.items, "dataaaa d", source);
@@ -82,130 +95,7 @@ const Manager = () => {
   //     });
   //   };
 
-  const source = "root";
-
-  const payload = {
-    name: "src",
-    type: "folder",
-    source: showInput?.id ?? "root",
-    items: showInput?.type === "folder" ? [] : null,
-    id: crypto.randomUUID(),
-  };
-
-  console.log(file, "fileeeeeee", payload);
-
-  const renderFiles = (file: folder[]) => {
-    return (
-      <ul className="space-y-2">
-        {file.map((f) => {
-          return (
-            <ul
-              key={f.id}
-              onClick={(e) => {
-                e.preventDefault();
-
-                console.log("clickedddd.");
-                // if (open === f.id) {
-                //   setOpen(null);
-                // } else {
-                setOpen(f.id);
-
-                // }
-              }}
-              className="space-y-2"
-            >
-              <li
-                onDoubleClick={() => f.id && addFiles(f.id, payload)}
-                className="cursor-pointer hover:bg-gray-200 p-2 rounded"
-              >
-                <div className="flex justify-between">
-                  <button className="cursor-pointer hover:bg-blue-400">
-                    <span>📁 {f.name}</span>
-                  </button>
-                  <div className="max-w-[60px] w-full flex justify-between">
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-
-                        if (f.id) {
-                          setShowInput({ id: f.id, type: "file" });
-                        }
-                      }}
-                      className="cursor-pointer hover:bg-green-400"
-                    >
-                      <span>+📄</span>
-                    </button>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-
-                        if (f.id) {
-                          setShowInput({ id: f.id, type: "folder" });
-                        }
-                      }}
-                      className="cursor-pointer hover:bg-red-400"
-                    >
-                      <span>+📁</span>
-                    </button>
-                  </div>
-                </div>
-              </li>
-              <div
-                className={` overflow-hidden transition-all duration-500 ${open === f.id ? "h-full" : "h-0"}`}
-              >
-                <ul className="ml-4 space-y-1">
-                  {f?.items && f.items.length > 0 && renderFiles(f.items)}
-                </ul>
-              </div>
-              {showInput?.id === f.id && (
-                <div className="flex flex-col gap-1 mt-2">
-                  <label
-                    htmlFor={`folder-name-${f.id}`}
-                    className="text-sm font-medium text-gray-600"
-                  >
-                    {showInput.type.toUpperCase()} Name
-                  </label>
-
-                  <input
-                    id={`folder-name-${f.id}`}
-                    // onMouseLeave={() => setShowInput(null)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") {
-                        const payloads = {
-                          name,
-                          type: showInput?.type,
-                          source: f.id,
-                          items: showInput?.type === "folder" ? [] : null,
-                          id: crypto.randomUUID(),
-                        };
-
-                        console.log(payloads, "payloads....");
-
-                        addFiles(f.id, payloads);
-
-                        setName("");
-                        setShowInput(null); // 👈 enter press
-                      }
-                    }}
-                    type="text"
-                    value={name}
-                    placeholder={`Enter ${showInput.type} name...`}
-                    onChange={(e) => {
-                      e.stopPropagation();
-                      setName(e.target.value);
-                    }}
-                    className="px-3 py-2 border border-gray-300 rounded-lg 
-                 focus:outline-none focus:ring-2 focus:ring-blue-500 
-                 text-sm"
-                  />
-                </div>
-              )}
-            </ul>
-          );
-        })}
-      </ul>
-    );
-  };
+  // console.log(file, "fileeeeeee", payload);
 
   return (
     <div className="flex h-full bg-gray-100">
@@ -214,10 +104,10 @@ const Manager = () => {
         <h2 className="text-lg font-semibold mb-4">Folders</h2>
 
         <li
-          onClick={(e) => {
-            e.preventDefault();
-            addFiles(source, payload);
-          }}
+          // onClick={(e) => {
+          //   e.preventDefault();
+          //   addFiles(source, payload);
+          // }}
           className="cursor-pointer hover:bg-gray-200 p-2 rounded"
         >
           <div className="flex justify-between">
@@ -244,7 +134,15 @@ const Manager = () => {
             </div>
           </div>
         </li>
-        {renderFiles(file)}
+        <RenderFiles
+          file={file}
+          rootFiles={file}
+          setName={setName}
+          name={name}
+          setShowInput={setShowInput}
+          showInput={showInput}
+          addFiles={addFiles}
+        />
       </div>
 
       {/* Main Content */}
